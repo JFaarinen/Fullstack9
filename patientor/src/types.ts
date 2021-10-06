@@ -13,8 +13,9 @@ export enum Gender {
 export interface Patient {
   id: string;
   name: string;
+  ssn?: string;
   occupation: string;
   gender: Gender;
-  ssn?: string;
   dateOfBirth?: string;
 }
+
