@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { Patient } from "../types";
-
 import { Action } from "./reducer";
 
 export type State = {
@@ -8,7 +7,7 @@ export type State = {
 };
 
 const initialState: State = {
-  patients: {}
+  patients: {},
 };
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([
@@ -33,3 +32,11 @@ export const StateProvider: React.FC<StateProviderProps> = ({
   );
 };
 export const useStateValue = () => useContext(StateContext);
+
+export const setPatientList = (patients: Patient[]): Action => {
+  return { type: 'SET_PATIENT_LIST', payload: patients };
+};
+
+export const addPatient = (patient: Patient): Action => {
+  return { type: 'ADD_PATIENT', payload: patient };
+};
