@@ -4,7 +4,8 @@ import axios from "axios";
 import { useStateValue, addPatient } from "../state";
 import { apiBaseUrl } from "../constants";
 import { Icon } from "semantic-ui-react";
-import { Patient, Gender } from "../types";
+import { Patient, Gender, Entry } from "../types";
+import EntryData from "./EntryData";
 
 const GenderIcon: React.FC<{ gender: Gender }> = ({ gender }) => {
     switch (gender) {
@@ -24,7 +25,7 @@ const PatientDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [{ patients }, dispatch] = useStateValue();
 
-    const patient = patients[id];
+    const patient: Patient = patients[id];
     console.log('patientData: ', patient);
 
     const fetchPatientData = async (id: string) => {
@@ -46,6 +47,13 @@ const PatientDetailPage: React.FC = () => {
             <h2>{patient.name} <GenderIcon gender={patient.gender} /></h2>
             <p>ssn: {patient.ssn}</p>
             <p>occupation: {patient.occupation} </p>
+            <h3>Entries</h3>
+            {patient.entries &&
+                patient.entries.map((entry: Entry) =>
+                    <EntryData key={entry.id} entry={entry} />
+                )
+            }
+
         </div>
     );
 };
