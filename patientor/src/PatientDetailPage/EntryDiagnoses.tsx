@@ -1,11 +1,16 @@
 import React from "react";
+import { useStateValue } from "../state";
 
-const EntryDiagnoses: React.FC<{ diagnoses: string[] }> = ({ diagnoses }) => {
+const EntryDiagnoses: React.FC<{ diagnoseCodes: string[] }> = ({ diagnoseCodes }) => {
+    const [{ iccCodes }] = useStateValue();
+    console.log('diagnoseData: ', iccCodes);
+
     return (
         <ul>
-            {diagnoses.map((d) =>
-                <li key={d}>{d}</li>
-            )}
+            {diagnoseCodes ? diagnoseCodes.map((c) => (
+                <li key={c}>{c} {iccCodes[c].name}  </li>
+            ))
+                : null}
         </ul>
     );
 

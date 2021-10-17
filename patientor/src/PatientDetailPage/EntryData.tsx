@@ -7,7 +7,7 @@ const EntryData: React.FC<{ entry: Entry }> = ({ entry }) => {
         <div>
             {entry.date} {entry.description} <br />
             {entry.diagnosisCodes &&
-                <EntryDiagnoses diagnoses={entry.diagnosisCodes} />
+                <EntryDiagnoses diagnoseCodes={entry.diagnosisCodes} />
             }
         </div>
     );
