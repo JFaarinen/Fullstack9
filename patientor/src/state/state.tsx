@@ -4,12 +4,12 @@ import { Action } from "./reducer";
 
 export type State = {
   patients: { [id: string]: Patient };
-  iccCodes: { [code: string]: Diagnosis };
+  icdCodes: { [code: string]: Diagnosis };
 };
 
 const initialState: State = {
   patients: {},
-  iccCodes: {}
+  icdCodes: {}
 };
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([
@@ -44,5 +44,5 @@ export const addPatient = (patient: Patient): Action => {
 };
 
 export const setDiagnoses = (diagnoses: Diagnosis[]): Action => {
-  return { type: 'SET_ICC_CODES_LIST', payload: diagnoses };
+  return { type: 'SET_ICD_CODES_LIST', payload: diagnoses };
 };

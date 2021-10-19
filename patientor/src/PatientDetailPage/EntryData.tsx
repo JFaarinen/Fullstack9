@@ -1,16 +1,26 @@
 import React from 'react';
-import EntryDiagnoses from './EntryDiagnoses';
-import { Entry } from '../types';
+import { Entry, EntryType } from '../types';
+import HealthCheck from './HealthCheck';
+import Hospital from './Hospital';
+import OccupationalCare from './OccupationalCare';
+
+export const assertNever = (value: never): never => {
+    throw new Error(
+        `Unhandled discriminated union member: ${JSON.stringify(value)}`
+    );
+};
 
 const EntryData: React.FC<{ entry: Entry }> = ({ entry }) => {
-    return (
-        <div>
-            {entry.date} {entry.description} <br />
-            {entry.diagnosisCodes &&
-                <EntryDiagnoses diagnoseCodes={entry.diagnosisCodes} />
-            }
-        </div>
-    );
+    switch (entry.type) {
+        case EntryType.HealthCheck:
+            return <HealthCheck entry={entry} />;
+        case EntryType.Hospital:
+            return <Hospital entry={entry} />;
+        case EntryType.OccupationalHealthcare:
+            return <OccupationalCare entry={entry} />;
+        default:
+            return assertNever(entry);
+    }
 };
 
 export default EntryData;

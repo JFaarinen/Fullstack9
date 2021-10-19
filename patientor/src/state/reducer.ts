@@ -11,7 +11,7 @@ export type Action =
     payload: Patient;
   }
   | {
-    type: "SET_ICC_CODES_LIST";
+    type: "SET_ICD_CODES_LIST";
     payload: Diagnosis[];
 
   };
@@ -37,15 +37,15 @@ export const reducer = (state: State, action: Action): State => {
           [action.payload.id]: action.payload
         }
       };
-    case "SET_ICC_CODES_LIST":
+    case "SET_ICD_CODES_LIST":
       return {
         ...state,
-        iccCodes: {
+        icdCodes: {
           ...action.payload.reduce(
             (memo, diagnosis) => ({ ...memo, [diagnosis.code]: diagnosis }),
             {}
           ),
-          ...state.iccCodes
+          ...state.icdCodes
         }
       };
     default:
