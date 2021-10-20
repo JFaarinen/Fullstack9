@@ -1,17 +1,19 @@
 import patientData from "../../data/patients";
-import { NewPatient, Patient, SecurePatient } from "../types";
+import { NewPatient, Patient, SecurePatient, Entry, NewEntry } from "../types";
 import { v4 as uuid } from "uuid";
 
+let patients = [...patientData];
+
 const getPatients = (): Array<Patient> => {
-    return patientData;
+    return patients;
 };
 
 const getPatientById = (id: string): Patient | undefined => {
-    return patientData.find((p) => p.id === id);
+    return patients.find((p) => p.id === id);
 };
 
 const getSecurePatients = (): Array<SecurePatient> => {
-    return patientData.map(({ id, name, dateOfBirth, gender, occupation }) =>
+    return patients.map(({ id, name, dateOfBirth, gender, occupation }) =>
     ({
         id,
         name,
@@ -27,13 +29,23 @@ const addPatient = (patient: NewPatient): Patient => {
         ...patient
     };
 
-    patientData.push(newPatient);
+    patients.push(newPatient);
     return newPatient;
+};
+
+const addEntry = (patient: Patient, newEntry: NewEntry): Patient => {
+    const entry: Entry = { ...newEntry, id: uuid() };
+    const updatedPatient = { ...patient, entries: patient.entries.concat(entry) };
+    patients = patientData.map((p) =>
+        p.id === updatedPatient.id ? updatedPatient : p
+    );
+    return updatedPatient;
 };
 
 export default {
     getPatients,
     getSecurePatients,
     getPatientById,
-    addPatient
+    addPatient,
+    addEntry
 };
