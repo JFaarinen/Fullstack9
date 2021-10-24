@@ -20,7 +20,7 @@ export interface Patient {
   entries: Entry[];
 }
 
-interface BaseEntry {
+export interface BaseEntry {
   id: string;
   description: string;
   date: string;
@@ -70,3 +70,7 @@ export enum EntryType {
 
 export type Entry = | HospitalEntry | OccupationalHealthcareEntry | HealthCheckEntry;
 
+export type NewEntry = | NewHospitalEntry | NewOccupationalHealthcareEntry | NewHealthCheckEntry;
+export type NewHospitalEntry = Omit<HospitalEntry, "id">;
+export type NewOccupationalHealthcareEntry = Omit<OccupationalHealthcareEntry, "id">;
+export type NewHealthCheckEntry = Omit<HealthCheckEntry, "id">;

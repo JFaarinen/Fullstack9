@@ -7,7 +7,7 @@ export type Action =
     payload: Patient[];
   }
   | {
-    type: "ADD_PATIENT";
+    type: "ADD_PATIENT" | "UPDATE_PATIENT";
     payload: Patient;
   }
   | {
@@ -46,6 +46,14 @@ export const reducer = (state: State, action: Action): State => {
             {}
           ),
           ...state.icdCodes
+        }
+      };
+    case "UPDATE_PATIENT":
+      return {
+        ...state,
+        patients: {
+          ...state.patients,
+          [action.payload.id]: action.payload
         }
       };
     default:

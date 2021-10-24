@@ -46,3 +46,8 @@ export const addPatient = (patient: Patient): Action => {
 export const setDiagnoses = (diagnoses: Diagnosis[]): Action => {
   return { type: 'SET_ICD_CODES_LIST', payload: diagnoses };
 };
+
+export const updatePatient = (patient: Patient): Action => ({
+  type: 'UPDATE_PATIENT',
+  payload: patient
+});

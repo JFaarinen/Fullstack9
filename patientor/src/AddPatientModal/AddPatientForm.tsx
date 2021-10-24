@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Button } from "semantic-ui-react";
 import { Field, Formik, Form } from "formik";
 
-import { TextField, SelectField, GenderOption } from "./FormField";
+import { TextField, SelectField, GenderOption } from "../components/FormField";
 import { Gender, Patient } from "../types";
 
 /*
@@ -22,7 +22,7 @@ const genderOptions: GenderOption[] = [
   { value: Gender.Other, label: "Other" }
 ];
 
-export const AddPatientForm = ({ onSubmit, onCancel } : Props ) => {
+export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
   return (
     <Formik
       initialValues={{
@@ -58,24 +58,28 @@ export const AddPatientForm = ({ onSubmit, onCancel } : Props ) => {
               label="Name"
               placeholder="Name"
               name="name"
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               component={TextField}
             />
             <Field
               label="Social Security Number"
               placeholder="SSN"
               name="ssn"
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               component={TextField}
             />
             <Field
               label="Date Of Birth"
               placeholder="YYYY-MM-DD"
               name="dateOfBirth"
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               component={TextField}
             />
             <Field
               label="Occupation"
               placeholder="Occupation"
               name="occupation"
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               component={TextField}
             />
             <SelectField
